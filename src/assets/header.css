@@ -1,0 +1,33 @@
+header {
+    background: #3d3c3c;
+    max-height: 30vh;
+}
+
+.header-container{
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-items {
+    flex-basis: 50%;
+    display: flex;
+    gap:  1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-menu {
+
+}
+
+.menu {
+    width: 30vw;
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
