@@ -31,3 +31,16 @@
         height: 100%;
     }
 }
+
+
+input[type='number'] {
+    -moz-appearance: textfield;
+    text-align: center;
+    width: 25%;
+    height: 6vh;
+}
+
+.count-btn {
+    width: 25%;
+    height: 6vh;
+}

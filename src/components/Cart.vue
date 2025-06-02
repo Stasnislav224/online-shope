@@ -2,13 +2,18 @@
 import CartItem from "@/components/CartItem.vue";
 
 
-const props = defineProps(['products']);
+const props = defineProps({
+    products: {
+        type: Array,
+    }
+});
 
 const deleteI = (id) => {
   const index = props.products.findIndex(item => item.id === id);
   props.products.splice(index, 1);
-}
 
+  localStorage.setItem('cart', JSON.stringify(props.products));
+}
 </script>
 
 <template>

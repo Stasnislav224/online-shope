@@ -8,8 +8,12 @@ import {ref, onMounted, computed, reactive} from "vue";
 
 const products = ref([]);
 const search = ref('');
-const cart = reactive([]);
+let cart = reactive([]);
 const showCart = ref(false);
+
+if (JSON.parse(localStorage.getItem('cart'))) {
+  cart = JSON.parse(localStorage.getItem('cart'));
+}
 
 
 const getProduct = async () => {
@@ -23,9 +27,15 @@ const getProduct = async () => {
 }
 
 const cartItem = (id) => {
-  cart.forEach(product => console.log(product));
-
+  cart.forEach(item => {
+      console.log(item)
+    if (item.id === id) {
+      console.log(item)
+    }
+  })
   cart.push(products.value.filter(product => product.id === id));
+
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 onMounted(() => {
@@ -55,7 +65,7 @@ const showCartsItem = () => {
   <main>
     <Cart
         v-if="showCart"
-        :products="cart || []"
+        :products="cart"
     />
     <section
         class="shop-wrapper"
