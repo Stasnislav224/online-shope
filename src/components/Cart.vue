@@ -1,5 +1,6 @@
 <script setup>
 import CartItem from "@/components/CartItem.vue";
+import { computed } from "vue";
 
 
 const props = defineProps({
@@ -14,6 +15,27 @@ const deleteI = (id) => {
 
   localStorage.setItem('cart', JSON.stringify(props.products));
 }
+
+const filterItems = computed(() => {
+    const arr = [];
+    const seenIds = [];
+
+    for (let i = 0; i < props.products.length; i++) {
+        const currentItem = props.products[i];
+
+        if (!seenIds[currentItem]) {
+            arr.push(currentItem);
+            seenIds[currentItem] = true;
+        }
+
+        const index = props.products.findIndex(item => currentItem.id === item.id);
+        props.products.splice(index, 1);
+    }
+
+    return arr;
+});
+
+
 </script>
 
 <template>
@@ -24,19 +46,15 @@ const deleteI = (id) => {
             v-if="props.products.length"
             class="cart-item-wrapper"
             >
-              <template
-                  v-for="products in props.products"
-              >
-                <CartItem
-                    v-for="product in products"
-                    :key="product.title"
-                    :title="product.title"
-                    :image="product.image"
-                    :price="product.price"
-                    :id="product.id"
-                    @deleted-product="deleteI"
-                />
-              </template>
+            <CartItem
+                v-for="product in filterItems"
+                :key="product.title"
+                :title="product.title"
+                :image="product.image"
+                :price="product.price"
+                :id="product.id"
+                @deleted-product="deleteI"
+            />
             </ul>
             <template
             v-else

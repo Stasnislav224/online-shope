@@ -27,13 +27,7 @@ const getProduct = async () => {
 }
 
 const cartItem = (id) => {
-  cart.forEach(item => {
-      console.log(item)
-    if (item.id === id) {
-      console.log(item)
-    }
-  })
-  cart.push(products.value.filter(product => product.id === id));
+  cart.push(products.value.find(product => product.id === id));
 
   localStorage.setItem('cart', JSON.stringify(cart));
 }
