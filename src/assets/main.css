@@ -1,6 +1,7 @@
 @import "header.css";
 @import "product.css";
 @import "cart.css";
+@import "aside.css";
 
 * {
     padding: 0;

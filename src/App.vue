@@ -9,6 +9,7 @@ import {ref, onMounted, computed, reactive} from "vue";
 const products = ref([]);
 const search = ref('');
 let cart = reactive([]);
+const category = reactive({});
 const showCart = ref(false);
 
 if (JSON.parse(localStorage.getItem('cart'))) {
@@ -20,6 +21,14 @@ const getProduct = async () => {
     try {
         const response = await axios.get(`https://fakestoreapi.com/products`);
         products.value = response.data;
+        products.value.forEach(product => {
+          if (category[product.category]) {
+            category[product.category] ++;
+          }
+          else {
+            category[product.category] = 1;
+          }
+        });
     }
     catch(error) {
         console.error(error);

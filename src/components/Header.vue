@@ -6,9 +6,15 @@ defineEmits(['update:search', 'show-cart']);
 <template>
     <header>
         <div class="container header-container">
-            <div class="logo">
-                <a href="#">Logo</a>
-            </div>
+          <div class="burger-menu">
+            <div class="rectangle"></div>
+            <div class="rectangle"></div>
+            <div class="rectangle"></div>
+            <div class="rectangle"></div>
+          </div>
+          <div class="logo">
+              <a href="#">Logo</a>
+          </div>
           <div class="header-items">
             <div 
             v-if="!cart"
