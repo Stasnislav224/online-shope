@@ -2,6 +2,7 @@
 import Header from "@/components/Header.vue";
 import ProductItem from "@/components/ProductItem.vue";
 import Cart from "@/components/Cart.vue";
+import SideBar from "./components/SideBar.vue";
 import axios  from "axios";
 import {ref, onMounted, computed, reactive} from "vue";
 
@@ -11,6 +12,7 @@ const search = ref('');
 let cart = reactive([]);
 const category = reactive({});
 const showCart = ref(false);
+const sideBar = ref(false);
 
 if (JSON.parse(localStorage.getItem('cart'))) {
   cart = JSON.parse(localStorage.getItem('cart'));
@@ -54,6 +56,16 @@ const filterProducts = computed(() => {
 });
 
 
+const showSidbar = () => {
+  sideBar.value = !sideBar.value;
+
+  if (sideBar.value) {
+    const elements = document.getElementsByClassName("cross");
+    elements.map(item => item.classList.toggle('action'));
+  }
+}
+
+
 const showCartsItem = () => {
   showCart.value = !showCart.value;
 }
@@ -63,25 +75,32 @@ const showCartsItem = () => {
   <Header
       v-model:search="search"
       @show-cart="showCartsItem"
+      @show-sideBar="showSidbar"
       :cart="showCart"
   />
-  <main>
-    <Cart
-        v-if="showCart"
-        :products="cart"
-    />
-    <section
-        class="shop-wrapper"
-        v-if="!showCart"
-    >
-      <ProductItem
-          v-for="product in filterProducts"
-          :key="product.id"
-          :title="product.title"
-          :price="product.price"
-          :image="product.image"
-          @buy="cartItem(product.id)"
+  <div class="wrapper">
+      <SideBar 
+        class="side-bar"
+        v-if="sideBar"
       />
-    </section>
-  </main>
+    <main>
+      <Cart
+          v-if="showCart"
+          :products="cart"
+      />
+      <section
+          class="shop-wrapper"
+          v-if="!showCart"
+      >
+        <ProductItem
+            v-for="product in filterProducts"
+            :key="product.id"
+            :title="product.title"
+            :price="product.price"
+            :image="product.image"
+            @buy="cartItem(product.id)"
+        />
+      </section>
+    </main>
+  </div>
 </template>

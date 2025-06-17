@@ -16,6 +16,8 @@ html {
 
 main {
     padding-bottom: 5rem;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .container {
@@ -30,3 +32,15 @@ main {
     justify-content: center;
     gap: 10px;
 }
+
+
+.wrapper {
+    display: flex;
+}
+
+.side-bar {
+    flex-grow: 0.4;
+    border: 1px solid #000;
+    background-color: gray;
+}
+

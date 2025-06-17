@@ -1,17 +1,21 @@
 <script setup>
 defineProps(['search', 'cart']);
-defineEmits(['update:search', 'show-cart']);
+const emit = defineEmits(['update:search', 'show-cart', 'show-sideBar']);
 </script>
 
 <template>
     <header>
         <div class="container header-container">
-          <div class="burger-menu">
+          <button 
+            class="burger-menu"
+            @click="$emit('show-sideBar')"
+          >
             <div class="rectangle"></div>
             <div class="rectangle"></div>
             <div class="rectangle"></div>
-            <div class="rectangle"></div>
-          </div>
+            <div class="cross cross-1"></div>
+            <div class="cross cross-1"></div>
+          </button>
           <div class="logo">
               <a href="#">Logo</a>
           </div>
